@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:        #F5F2ED;
+  --surface:   #FFFFFF;
+  --border:    #E0DAD0;
+  --text:      #1A1714;
+  --muted:     #8A8279;
+  --accent:    #C84B31;
+  --accent-lt: #F4E8E4;
+  --green:     #2D6A4F;
+  --green-lt:  #E8F4EE;
+  --radius:    6px;
+  --shadow:    0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+input, select, textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  width: 100%;
+  padding: 0.6rem 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+}
+
+label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.25rem;
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-primary   { background: var(--accent);  color: #fff; }
+.btn-secondary { background: var(--border);  color: var(--text); }
+.btn-danger    { background: #e53e3e;         color: #fff; }
+.btn-ghost     { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.error-msg {
+  background: var(--accent-lt);
+  color: var(--accent);
+  border-radius: var(--radius);
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+}
+.success-msg {
+  background: var(--green-lt);
+  color: var(--green);
+  border-radius: var(--radius);
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* ── React Big Calendar overrides ── */
+.rbc-calendar {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  background: var(--surface);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.rbc-header {
+  font-weight: 600;
+  padding: 0.6rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.rbc-event {
+  border: none !important;
+  border-radius: 4px !important;
+  font-size: 0.8rem;
+}
+.rbc-event.rbc-selected {
+  filter: brightness(0.85);
+}
+.rbc-today { background: var(--accent-lt) !important; }
+.rbc-toolbar button {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  background: var(--surface);
+}
+.rbc-toolbar button.rbc-active,
+.rbc-toolbar button:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
