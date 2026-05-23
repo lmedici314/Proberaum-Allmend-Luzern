@@ -36,7 +36,7 @@ function defaultEndForRoom(start: Date): Date {
 export default function ReservationModal({
   defaultStart, defaultRoom, onSave, onDelete, onClose, existing, isOwner
 }: ReservationModalProps) {
-  const [room,  setRoom]  = useState<Room>(existing?.room ?? defaultRoom ?? 'studio')
+  const [room,  setRoom]  = useState<Room>(existing?.room ?? defaultRoom ?? 'jam')
   const [title, setTitle] = useState(existing?.title ?? '')
 
   const initialStart = existing?.start ?? defaultStartForRoom(existing?.room ?? defaultRoom ?? 'studio', defaultStart)
@@ -102,7 +102,7 @@ export default function ReservationModal({
           <div>
             <label>Raum</label>
             <div style={{ display: 'flex', gap: '0.5rem' }}>
-              {(['studio', 'jam'] as Room[]).map(r => (
+              {(['jam', 'studio'] as Room[]).map(r => (
                 <button key={r} disabled={readOnly}
                   onClick={() => !readOnly && handleRoomChange(r)}
                   style={{

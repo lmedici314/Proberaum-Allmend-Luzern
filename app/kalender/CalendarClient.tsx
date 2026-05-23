@@ -293,7 +293,7 @@ export default function CalendarClient({ userId, kurzname }: Props) {
         <button className="btn btn-primary" onClick={() => {
           setSelectedEvent(undefined)
           setSelectedSlot(new Date())
-          setSelectedRoom('studio')
+          setSelectedRoom('jam')
           setModalOpen(true)
         }}>
           + Reservieren
@@ -339,7 +339,7 @@ export default function CalendarClient({ userId, kurzname }: Props) {
         onSelectSlot={({ start }) => {
           setSelectedEvent(undefined)
           setSelectedSlot(start as Date)
-          setSelectedRoom('studio')
+          setSelectedRoom('jam')
           setModalOpen(true)
         }}
         onSelectEvent={(event) => {
