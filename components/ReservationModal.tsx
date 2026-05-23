@@ -8,6 +8,7 @@ type Room = 'studio' | 'jam'
 interface ReservationModalProps {
   defaultStart?: Date
   defaultRoom?: Room
+  defaultTitle?: string
   onSave: (data: { title: string; start: Date; end: Date; room: Room }) => Promise<void>
   onDelete?: () => Promise<void>
   onClose: () => void
@@ -34,10 +35,10 @@ function defaultEndForRoom(start: Date): Date {
 }
 
 export default function ReservationModal({
-  defaultStart, defaultRoom, onSave, onDelete, onClose, existing, isOwner
+  defaultStart, defaultRoom, defaultTitle, onSave, onDelete, onClose, existing, isOwner
 }: ReservationModalProps) {
   const [room,  setRoom]  = useState<Room>(existing?.room ?? defaultRoom ?? 'jam')
-  const [title, setTitle] = useState(existing?.title ?? '')
+  const [title, setTitle] = useState(existing?.title ?? defaultTitle ?? '')
 
   const initialStart = existing?.start ?? defaultStartForRoom(existing?.room ?? defaultRoom ?? 'studio', defaultStart)
   const [start, setStart] = useState<Date>(initialStart)

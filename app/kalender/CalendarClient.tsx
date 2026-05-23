@@ -34,9 +34,9 @@ interface CalEvent {
   rawTitle: string // Titel ohne Prefix
 }
 
-interface Props { userId: string; kurzname: string }
+interface Props { userId: string; kurzname: string; defaultTitle: string }
 
-export default function CalendarClient({ userId, kurzname }: Props) {
+export default function CalendarClient({ userId, kurzname, defaultTitle }: Props) {
   const supabase = createClient()
   const [events, setEvents] = useState<CalEvent[]>([])
   const [view, setView] = useState<View>('week')
@@ -289,7 +289,7 @@ export default function CalendarClient({ userId, kurzname }: Props) {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <h2 style={{ fontSize: '1.6rem' }}>Reservation Proberaum Kegelsporthalle \u2013 Luzern</h2>
+        <h2 style={{ fontSize: '1.6rem' }}>Reservation Proberaum Kegelsporthalle - Luzern</h2>
         <button className="btn btn-primary" onClick={() => {
           setSelectedEvent(undefined)
           setSelectedSlot(new Date())
@@ -368,6 +368,7 @@ export default function CalendarClient({ userId, kurzname }: Props) {
         <ReservationModal
           defaultStart={selectedSlot}
           defaultRoom={selectedRoom}
+          defaultTitle={defaultTitle}
           onSave={handleSave}
           onClose={() => setModalOpen(false)}
         />

@@ -3,9 +3,9 @@ import { cookies } from 'next/headers'
 import { createServerClient } from '@supabase/ssr'
 import { createAdminClient } from '../../lib/supabase-admin'
 import Navbar from '../../components/Navbar'
-import CalendarClient from './CalendarClient'
+import ProfilClient from './ProfilClient'
 
-export default async function KalenderPage() {
+export default async function ProfilPage() {
   const cookieStore = await cookies()
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -19,18 +19,19 @@ export default async function KalenderPage() {
   const admin = createAdminClient()
   const { data: profile } = await admin
     .from('profiles')
-    .select('kurzname, is_admin, default_title')
+    .select('kurzname, natel, default_title, is_admin')
     .eq('id', user.id)
     .single()
 
   return (
     <>
       <Navbar kurzname={profile?.kurzname ?? user.email!} isAdmin={!!profile?.is_admin} />
-      <main style={{ padding: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-        <CalendarClient
+      <main style={{ padding: '1.5rem', maxWidth: '600px', margin: '0 auto' }}>
+        <ProfilClient
           userId={user.id}
-          kurzname={profile?.kurzname ?? ''}
-          defaultTitle={profile?.default_title ?? ''}
+          initialKurzname={profile?.kurzname ?? ''}
+          initialNatel={profile?.natel ?? ''}
+          initialDefaultTitle={profile?.default_title ?? ''}
         />
       </main>
     </>

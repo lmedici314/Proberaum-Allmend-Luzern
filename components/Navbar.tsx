@@ -33,9 +33,12 @@ export default function Navbar({ kurzname, isAdmin }: NavbarProps) {
         Kalender Proberaum
       </span>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <span style={{ color: 'var(--muted)', fontSize: '0.9rem' }}>
+        <a href="/profil" style={{
+          color: 'var(--muted)', fontSize: '0.9rem', textDecoration: 'none',
+          fontWeight: pathname === '/profil' ? 600 : 400,
+        }}>
           {kurzname}
-        </span>
+        </a>
         {isAdmin && (
           <a href={onAdminPage ? '/kalender' : '/admin'}
             className="btn btn-ghost" style={{ fontSize: '0.85rem', padding: '0.35rem 0.8rem' }}>
