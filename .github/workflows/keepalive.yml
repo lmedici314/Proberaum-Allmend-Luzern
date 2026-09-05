@@ -47,7 +47,7 @@ jobs:
 
           echo "Inserted ID2: $ID2"
 
-          # Beide wieder löschen
+          # Beide wieder loeschen
           curl -s -X DELETE \
             "$BASE_URL/reservations?id=eq.$ID1" \
             -H "apikey: $SERVICE_KEY" \
@@ -59,3 +59,20 @@ jobs:
             -H "Authorization: Bearer $SERVICE_KEY"
 
           echo "Deleted both reservations. Keepalive done."
+
+  # Verhindert, dass GitHub den Zeitplan nach 60 Tagen ohne Commit deaktiviert.
+  # Ruft bei jedem geplanten Lauf den REST-Endpunkt "workflow enable" auf.
+  workflow-keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Re-enable this workflow
+        run: |
+          curl -s -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/keepalive.yml/enable"
+          echo "Workflow re-enabled."
